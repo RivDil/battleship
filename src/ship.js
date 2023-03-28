@@ -1,8 +1,8 @@
 
-
-function ship(length){
+function ship(length, coordinates){
     const ship = {
         length: length,
+        coordinates: coordinates,
         hits: 0,
         hit: function(){
             this.hits++
