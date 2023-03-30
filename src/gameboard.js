@@ -3,6 +3,7 @@ const ship = require("./ship")
 function gameboard(){
     const board = Array(10).fill(0).map(() => Array(10).fill(0));
     const ships = [];
+    const miss = [];
     for (let i=1;i<=5;i++){
         let row = Math.floor(Math.random() * 10);
         let col = Math.floor(Math.random() * 10);
@@ -43,6 +44,21 @@ function gameboard(){
         }
         return true
     }
+    function receiveAttack(row,col){
+        let ship = board[row][col];
+        if (ship !== 0) {
+            ship.hit();
+            if(ships.every(ship.isSunk())){
+                return 'You win'
+            }else{return 'hit';}
+        } else {
+            miss.push([row,col])
+            return 'miss';
+        }
+    }
     console.log(board)
+    return {receiveAttack}
 }
-gameboard()
+const myGameBoard = gameboard();
+ 
+
