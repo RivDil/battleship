@@ -56,9 +56,9 @@ function gameboard(){
             return 'miss';
         }
     }
-    console.log(board)
-    return {receiveAttack}
+    return {receiveAttack, board, ships}
 }
 const myGameBoard = gameboard();
  
 
+module.exports = gameboard;
