@@ -32,7 +32,12 @@ describe('boardgame functions', () => {
     })
 
     test('Does the validCoordinates function verify if there is enough space for the ship if it is horizontal',()=>{
-      const newShip = [0,1,5,4,7,8,9,5,2,2] // 10 elements inside the array
-      expect(newGame.validCoordinates(newShip,0,1,true)).toBe(false) // col (1) + ship.length (10) should be false
+      const newShip = {length: 10} // 10 elements inside the array
+      expect(newGame.validCoordinates(newShip,0,1,true)).toBe(false); // col (1) + ship.length (10) should be false
+    })
+    test('Does the validCoordinates function verify if there is another ship on the col before putting the ship',()=>{
+      newGame.board[7,3] = 'N';
+      const newShip = {length:5}
+      expect(newGame.validCoordinates(newShip,7,4,true)).toBe(false);
     })
 })
