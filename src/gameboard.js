@@ -56,7 +56,7 @@ function gameboard(){
             return 'miss';
         }
     }
-    return {receiveAttack, board, ships}
+    return {receiveAttack, board, ships, validCoordinates}
 }
 const myGameBoard = gameboard();
  

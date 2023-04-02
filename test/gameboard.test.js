@@ -28,7 +28,11 @@ describe('boardgame functions', () => {
               }
             });
           });
-        expect(totalShips).toStrictEqual([1,2,3,4,5])
-          
+        expect(totalShips).toStrictEqual([1,2,3,4,5])      
+    })
+
+    test('Does the validCoordinates function verify if there is enough space for the ship if it is horizontal',()=>{
+      const newShip = [0,1,5,4,7,8,9,5,2,2] // 10 elements inside the array
+      expect(newGame.validCoordinates(newShip,0,1,true)).toBe(false) // col (1) + ship.length (10) should be false
     })
 })
