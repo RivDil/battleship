@@ -32,12 +32,21 @@ describe('boardgame functions', () => {
     })
 
     test('Does the validCoordinates function verify if there is enough space for the ship if it is horizontal',()=>{
-      const newShip = {length: 10} // 10 elements inside the array
-      expect(newGame.validCoordinates(newShip,0,1,true)).toBe(false); // col (1) + ship.length (10) should be false
+      const testShip = {length: 10} // 10 elements inside the array
+      expect(newGame.validCoordinates(testShip,0,1,true)).toBe(false); // col (1) + ship.length (10) should be false
     })
     test('Does the validCoordinates function verify if there is another ship on the col before putting the ship',()=>{
-      newGame.board[7,3] = 'N';
-      const newShip = {length:5}
-      expect(newGame.validCoordinates(newShip,7,4,true)).toBe(false);
+      newGame.board[7][3] = 'N';
+      const testShip = {length:5}
+      expect(newGame.validCoordinates(testShip,7,2,true)).toStrictEqual(false);
+    })
+    test('Does the validCoordinates function verify if there is enough space for the ship if it is vertical',()=>{
+      const testShip = {length: 10} // 10 elements inside the array
+      expect(newGame.validCoordinates(testShip,1,0,false)).toBe(false); // row (1) + ship.length (10) should be false
+    })
+    test('Does the validCoordinates function verify if there is another ship on the row before putting the ship',()=>{
+      newGame.board[7][3] = 'N';
+      const testShip = {length:5}
+      expect(newGame.validCoordinates(testShip,6,3,false)).toBe(false);
     })
 })
