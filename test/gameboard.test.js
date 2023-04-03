@@ -1,5 +1,5 @@
 const gameboard = require('../src/gameboard');
-
+const ship = require('../src/ship');
 let newGame;
 
 beforeEach(() => {
@@ -49,4 +49,36 @@ describe('boardgame functions', () => {
       const testShip = {length:5}
       expect(newGame.validCoordinates(testShip,6,3,false)).toBe(false);
     })
+    test('receiveAttack returns "hit" if a ship is hit and updates hits count', () => {
+      const testShip = ship(1, [0, 0]);
+      newGame.board[0][0] = testShip;
+      expect(newGame.receiveAttack(0, 0)).toBe('hit');
+      expect(testShip.hits).toBe(1);
+    });
+  
+    test('receiveAttack returns "miss" if no ship is hit', () => {
+      newGame.board[0][0] = 0;
+      expect(newGame.receiveAttack(0, 0)).toBe('miss');
+    });
+  
+    test('receiveAttack updates missed attacks array', () => {
+      newGame.receiveAttack(0, 0);
+      expect(newGame.miss).toEqual([[0, 0]]);
+    });
+  
+    test('receiveAttack returns "You win" if all ships are sunk', () => {
+      newGame.ships.forEach((testShip, index) => {
+        newGame.board[index][0] = testShip;
+        testShip.length = 1;
+        testShip.hits = 0;
+      });
+  
+      newGame.ships.forEach((_, index) => {
+        if (index < newGame.ships.length - 1) {
+          expect(newGame.receiveAttack(index, 0)).toBe('hit');
+        } else {
+          expect(newGame.receiveAttack(index, 0)).toBe('You win');
+        }
+      });
+    });
 })

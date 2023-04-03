@@ -48,7 +48,7 @@ function gameboard(){
         let ship = board[row][col];
         if (ship !== 0) {
             ship.hit();
-            if(ships.every(ship.isSunk())){
+            if(ships.every(i => i.isSunk())){
                 return 'You win'
             }else{return 'hit';}
         } else {
@@ -56,9 +56,8 @@ function gameboard(){
             return 'miss';
         }
     }
-    return {receiveAttack, board, ships, validCoordinates}
+    return {receiveAttack, board, ships, validCoordinates,miss}
 }
-const myGameBoard = gameboard();
  
 
 module.exports = gameboard;
