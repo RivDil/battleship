@@ -1,5 +1,4 @@
 const player = require('../src/player');
-const gameboard = require('../src/gameboard');
 
 describe('testing player function', () => {
     test('randomAttack should call receiveAttack with valid arguments', () => {
